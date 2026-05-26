@@ -43,7 +43,7 @@ Certifique-se de ter instalado em sua máquina:
     node src/seed.js
 
 5. ```bash
-    npm run dev
+    node src/server.js
 
 6. Em um novo terminal, navegue até a pasta do front-end
     ```bash

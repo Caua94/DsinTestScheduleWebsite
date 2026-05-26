@@ -5,7 +5,8 @@ const {
     criarAgendamento, 
     listarAgendamentos, 
     listarTodosAgendamentosAdmin,
-    atualizarStatusAgendamento
+    atualizarStatusAgendamento,
+    verificarSugestaoSemana
 } = require('../controllers/appointmentController');
 const { appointmentValidation } = require('../middlewares/validacoes');
 
@@ -15,5 +16,6 @@ router.post('/', criarAgendamento);
 router.get('/', listarAgendamentos);
 router.put('/cancelar/:id', appointmentValidation, atualizarStatusAgendamento);
 router.get('/admin', listarTodosAgendamentosAdmin);
+router.get('/sugestao', verificarSugestaoSemana);
 
 module.exports = router;

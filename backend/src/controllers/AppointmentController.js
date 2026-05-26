@@ -1,4 +1,3 @@
-// backend/src/controllers/appointmentController.js
 const Appointment = require('../models/Appointment');
 const User = require('../models/User');
 const Service = require('../models/Service');
@@ -18,12 +17,11 @@ const obterHorariosDisponiveis = async (req, res) => {
         });
 
         const horariosOcupados = agendamentosExistentes.map(agendamento => agendamento.horario);
-
         const resultado = HORARIOS_SALAO.filter(horario => !horariosOcupados.includes(horario));
 
         return res.status(200).json(resultado);
     } catch (error) {
-        console.error('Erro ao obter horários disponíveis:', error);
+        console.error(error);
         return res.status(500).json({ error: 'Erro ao obter horários disponíveis' });
     }
 };
@@ -57,7 +55,7 @@ const criarAgendamento = async (req, res) => {
 
         return res.status(201).json({ message: 'Agendamento criado com sucesso', agendamento: novoAgendamento });
     } catch (error) {
-        console.error('Erro ao criar agendamento:', error);
+        console.error(error);
         return res.status(500).json({ error: 'Erro ao criar agendamento' });
     }
 };
@@ -73,7 +71,6 @@ const listarAgendamentos = async (req, res) => {
         const agendamentosBrutos = await Appointment.find({ clienteId: clienteId });
 
         const agendamentos = await Promise.all(agendamentosBrutos.map(async (agendamento) => {
-            
             if (agendamento.status === 'Pendente') {
                 const dataAtendimentoObj = new Date(`${agendamento.data}T${agendamento.horario}:00`);
                 const dataAtual = new Date();
@@ -96,7 +93,6 @@ const listarAgendamentos = async (req, res) => {
                 }, 'nome preco');
             }
 
-          
             const agendamentoObjeto = agendamento.toObject();
 
             return {
@@ -108,9 +104,8 @@ const listarAgendamentos = async (req, res) => {
         }));
 
         return res.status(200).json({ agendamentos });
-
     } catch (error) {
-        console.error('Erro ao listar agendamentos:', error);
+        console.error(error);
         return res.status(500).json({ error: 'Erro interno ao listar agendamentos' });
     }
 };
@@ -120,7 +115,6 @@ const listarTodosAgendamentosAdmin = async (req, res) => {
         const agendamentosBrutos = await Appointment.find().sort({ createdAt: -1 });
 
         const agendamentos = await Promise.all(agendamentosBrutos.map(async (agendamento) => {
-            
             const dadosCliente = await User.findById(agendamento.clienteId, 'nome email');
 
             let servicosPreenchidos = [];
@@ -131,20 +125,18 @@ const listarTodosAgendamentosAdmin = async (req, res) => {
                 }, 'nome preco');
             }
 
-            
             const agendamentoObjeto = agendamento.toObject();
 
             return {
                 ...agendamentoObjeto,
                 clienteId: dadosCliente ? { _id: dadosCliente._id, nome: dadosCliente.nome, email: dadosCliente.email } : { nome: "Cliente Não Encontrado" },
-                serviçoId: servicosPreenchidos // Substitui com sucesso o array de IDs pelos objetos dos serviços
+                serviçoId: servicosPreenchidos
             };
         }));
 
         return res.status(200).json({ agendamentos });
-
     } catch (error) {
-        console.error('Erro no painel de admin:', error);
+        console.error(error);
         return res.status(500).json({ error: 'Erro interno ao carregar painel de admin.' });
     }
 };
@@ -163,8 +155,61 @@ const atualizarStatusAgendamento = async (req, res) => {
 
         return res.status(200).json({ message: 'Agendamento cancelado com sucesso', agendamento });
     } catch (error) {
-        console.error('Erro ao cancelar agendamento:', error);
+        console.error(error);
         return res.status(500).json({ error: 'Erro ao cancelar agendamento' });
+    }
+};
+
+const verificarSugestaoSemana = async (req, res) => {
+    try {
+        const { clienteId, data } = req.query;
+
+        if (!clienteId || !data) {
+            return res.status(400).json({ error: 'Parâmetros clienteId e data são obrigatórios.' });
+        }
+
+        const dataAlvo = new Date(`${data}T12:00:00`);
+        const diaDaSemana = dataAlvo.getDay();
+        
+        const primeiroDiaSemana = new Date(dataAlvo);
+        primeiroDiaSemana.setDate(dataAlvo.getDate() - diaDaSemana);
+        
+        const ultimoDiaSemana = new Date(dataAlvo);
+        ultimoDiaSemana.setDate(dataAlvo.getDate() + (6 - diaDaSemana));
+
+        const anoInicio = primeiroDiaSemana.getFullYear();
+        const mesInicio = String(primeiroDiaSemana.getMonth() + 1).padStart(2, '0');
+        const diaInicio = String(primeiroDiaSemana.getDate()).padStart(2, '0');
+        const inicioIso = `${anoInicio}-${mesInicio}-${diaInicio}`;
+
+        const anoFim = ultimoDiaSemana.getFullYear();
+        const mesFim = String(ultimoDiaSemana.getMonth() + 1).padStart(2, '0');
+        const diaFim = String(ultimoDiaSemana.getDate()).padStart(2, '0');
+        const fimIso = `${anoFim}-${mesFim}-${diaFim}`;
+
+        const agendamentoExistente = await Appointment.findOne({
+            clienteId,
+            data: { $gte: inicioIso, $lte: fimIso },
+            status: { $in: ['Pendente', 'Confirmado'] }
+        });
+
+        if (agendamentoExistente && agendamentoExistente.data !== data) {
+            const dadosServico = await Service.find({ _id: { $in: agendamentoExistente.serviçoId } }, 'nome');
+            const nomesServicos = dadosServico.map(s => s.nome).join(', ');
+            const dataFormatada = agendamentoExistente.data.split('-').reverse().join('/');
+
+            return res.status(200).json({
+                sugerir: true,
+                dataSugerida: agendamentoExistente.data,
+                dataSugeridaBr: dataFormatada,
+                servicosExistentes: nomesServicos
+            });
+        }
+
+        return res.status(200).json({ sugerir: false });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Erro interno ao processar sugestão.' });
     }
 };
 
@@ -174,4 +219,5 @@ module.exports = {
     listarAgendamentos,
     listarTodosAgendamentosAdmin,
     atualizarStatusAgendamento,
+    verificarSugestaoSemana,
 };
