@@ -52,24 +52,24 @@ Certifique-se de ter instalado em sua máquina:
 
 
 Credenciais de Teste Padrão
-# Caso queira testar os diferentes fluxos da aplicação imediatamente através dos dados populados pelo seed.js:
+## Caso queira testar os diferentes fluxos da aplicação imediatamente através dos dados populados pelo seed.js:
 
-## Acesso do Administrador (Visão da Leila):
+### Acesso do Administrador (Visão da Leila):
 
-## Telefone: 14999999999
+Telefone: 14999999999
 
-## Senha: admin123
+Senha: admin123
 
-# Regras de Negócio:
+### Regras de Negócio:
 
-### Regra Automatizada de Bloqueio por Antecedência (2 Dias): O sistema calcula de forma estrita em milissegundos a antecedência de cada atendimento. Agendamentos com menos de 2 dias de prazo perdem o botão de exclusão da interface do cliente e são travados no middleware de validação do back-end. Adicionalmente, quando o cliente lista seu histórico, o servidor verifica se o agendamento pendente cruzou a janela limite e atualiza seu status para "Confirmado" de forma transparente e automática.
+Regra Automatizada de Bloqueio por Antecedência (2 Dias): O sistema calcula de forma estrita em milissegundos a antecedência de cada atendimento. Agendamentos com menos de 2 dias de prazo perdem o botão de exclusão da interface do cliente e são travados no middleware de validação do back-end. Adicionalmente, quando o cliente lista seu histórico, o servidor verifica se o agendamento pendente cruzou a janela limite e atualiza seu status para "Confirmado" de forma transparente e automática.
 
-### Painel Administrativo Independente: A interface administrativa foi isolada através de verificação de permissões do usuário logado (role: 'Administrador'). O painel operacional gerencial permite que a Leila visualize todos os agendamentos realizados no salão e execute cancelamentos irrestritos imediatos.
+Painel Administrativo Independente: A interface administrativa foi isolada através de verificação de permissões do usuário logado (role: 'Administrador'). O painel operacional gerencial permite que a Leila visualize todos os agendamentos realizados no salão e execute cancelamentos irrestritos imediatos.
 
-### Interface Sem Alertas Nativos: Em conformidade com os princípios modernos de usabilidade e UX, todos os diálogos de confirmação de exclusão e caixas de avisos informativos em tela foram estruturados com componentes e modais interativos construídos puramente em Tailwind CSS, eliminando o uso de métodos rudimentares como alert() ou confirm().
+Interface Sem Alertas Nativos: Em conformidade com os princípios modernos de usabilidade e UX, todos os diálogos de confirmação de exclusão e caixas de avisos informativos em tela foram estruturados com componentes e modais interativos construídos puramente em Tailwind CSS, eliminando o uso de métodos rudimentares como alert() ou confirm().
 
-### Interface limpa e responsiva
+Interface limpa e responsiva
 
 
 
-# Para melhor visualização existe uma pasta "docs" onde tera imgs e videos do funcionamento no app
+### Para melhor visualização existe uma pasta "docs" onde tera imgs e videos do funcionamento no app
