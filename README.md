@@ -46,14 +46,13 @@ Certifique-se de ter instalado em sua máquina:
     npm run dev
 
 6. Em um novo terminal, navegue até a pasta do front-end
-
     ```bash
     cd frontend
-
-7.   ```bash
+7.  
+    ```bash
     npm install
-
-7.    ```bash
+    
+8.  ```bash
     npm run dev
 
 
