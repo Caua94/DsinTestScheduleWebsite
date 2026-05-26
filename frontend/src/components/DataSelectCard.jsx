@@ -46,7 +46,7 @@ export default function DataSelectCard({ onDateSelect }) {
                         onClick={() => handleSelect(item.id)}
                         className={`w-20 h-20 rounded-2xl shadow-lg flex flex-col items-center justify-center p-4 gap-y-1 cursor-pointer transition-all duration-200 shrink-0
                             ${isSelected
-                                ? 'bg-[#333333] text-white scale-105' 
+                                ? 'bg-[#8E6D67] text-white scale-105' 
                                 : 'bg-[#ffffff] text-gray-800 hover:bg-gray-50' 
                             }`}
                     >

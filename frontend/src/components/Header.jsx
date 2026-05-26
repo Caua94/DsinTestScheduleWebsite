@@ -30,7 +30,7 @@ export default function Header() {
   };
 
   return (
-    <header className="w-screen h-16 bg-[#fcf9f8] text-[#63433e] flex items-center justify-between text-2xl shadow-2xl relative">
+    <header className="w-full h-16 bg-[#FAF7F5] text-[#63433e] flex items-center justify-between text-2xl shadow-2xl relative">
       <h1 className="ml-4 font-title font-regular cursor-pointer" onClick={() => navigate('/')}>
         Leila Cabeleleira
       </h1>

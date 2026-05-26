@@ -53,7 +53,7 @@ function ServiceCard({ onServiceSelect }) {
                         onClick={() => handleSelect(service)}
                         className={`w-full h-30 rounded-2xl shadow-xl flex flex-col items-start justify-center p-4 gap-y-1 cursor-pointer transition-all duration-200
                             ${isSelected
-                                ? 'bg-[#333333] text-white scale-105'
+                                ? 'bg-[#8E6D67] text-white scale-105'
                                 : 'bg-[#ffffff] text-gray-800 hover:bg-gray-50'
                             }`}
                     >

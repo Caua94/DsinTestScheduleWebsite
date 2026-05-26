@@ -38,7 +38,7 @@ export default function HourSelectCard({ onHourSelect, horariosOcupados = [] }) 
                             ${isOcupado
                                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed line-through shadow-none' 
                                 : isSelected
-                                    ? 'bg-[#333333] text-white scale-105' 
+                                    ? 'bg-[#8E6D67] text-white scale-105' 
                                     : 'bg-[#ffffff] text-gray-800 hover:bg-gray-50' 
                             }`}
                     >

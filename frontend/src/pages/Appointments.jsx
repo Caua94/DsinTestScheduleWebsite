@@ -86,15 +86,15 @@ export default function HistoricoAppointments() {
     if (loading) return <p className="text-center p-8 text-gray-500 text-sm">Carregando seu histórico...</p>;
 
     return (
-        <div className="w-full max-w-md mx-auto p-4 pb-32 relative">
+        <div className="w-full mx-auto p-4 pb-32 relative bg-[#FAF7F5] min-h-screen rounded-2xl shadow-xl font-sans">
 
             {/* SISTEMA DE AVISO EM TAILWIND (TOAST NOTIFICATION) */}
             {mensagemStatus.texto && (
                 <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-sm px-4">
                     <div className={`w-full p-3 rounded-xl text-sm font-semibold text-center shadow-xl border transition-all duration-300
                         ${mensagemStatus.tipo === 'sucesso'
-                            ? 'bg-green-50 text-green-700 border-green-200'
-                            : 'bg-red-50 text-red-700 border-red-200'
+                            ? 'bg-[#8E6D67] text-white border-[#8E6D67]'
+                            : 'bg-[#8E6D67] text-red-500 border-[#8E6D67]'
                         }`}
                     >
                         {mensagemStatus.texto}
@@ -105,9 +105,9 @@ export default function HistoricoAppointments() {
          
             {modalConfirma.aberto && (
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div className="bg-white rounded-2xl max-w-xs w-full p-6 shadow-2xl border border-gray-100">
-                        <h2 className="text-base font-bold text-gray-800 text-start">Confirmar Cancelamento</h2>
-                        <p className="text-xs text-gray-500 text-start mt-2">
+                    <div className="bg-[#FAF7F5] rounded-2xl max-w-xs w-full p-6 shadow-2xl border border-gray-100">
+                        <h2 className="text-base font-bold text-[#1E2D4A] text-start">Confirmar Cancelamento</h2>
+                        <p className="text-xs text-[#1E2D4A] text-start mt-2">
                             Tem certeza que deseja cancelar este agendamento? Esta ação não poderá ser desfeita.
                         </p>
                         <div className="flex items-center justify-end gap-x-3 mt-6">
@@ -119,7 +119,7 @@ export default function HistoricoAppointments() {
                             </button>
                             <button
                                 onClick={handleCancelar}
-                                className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md transition-all active:scale-95"
+                                className="bg-[#8E6D67] hover:bg-[#7a5a52] text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md transition-all active:scale-95"
                             >
                                 Confirmar
                             </button>
@@ -129,7 +129,7 @@ export default function HistoricoAppointments() {
             )}
 
             <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-[#333] font-title">Meus Agendamentos</h2>
+                <h2 className="text-xl font-bold text-[#1E2D4A] font-title">Meus Agendamentos</h2>
 
                 <select
                     value={filtroDias}
@@ -169,7 +169,7 @@ export default function HistoricoAppointments() {
 
                                 <div className="text-start">
                                     <span className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Serviços solicitados</span>
-                                    <p className="text-sm font-semibold text-[#63433e] mt-0.5">
+                                    <p className="text-sm font-semibold text-[#1E2D4A] mt-0.5">
                                         {agendamento.serviçoId && agendamento.serviçoId.length > 0 ? (
                                             agendamento.serviçoId.map(s => s.nome).join(', ')
                                         ) : (
@@ -183,7 +183,7 @@ export default function HistoricoAppointments() {
                                         liberadoParaAlterar ? (
                                             <button
                                                 onClick={() => abrirConfirmacao(agendamento._id)}
-                                                className="text-xs font-bold text-red-500 hover:text-red-700 active:scale-95 transition-all focus:outline-none"
+                                                className="text-xs font-bold text-[#8E6D67] hover:text-[#7a5a52] active:scale-95 transition-all focus:outline-none"
                                             >
                                                 Cancelar Agendamento
                                             </button>

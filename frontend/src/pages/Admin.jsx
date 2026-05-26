@@ -62,15 +62,15 @@ export default function AdminPanel() {
     if (loading) return <p className="text-center p-8 text-sm text-gray-500">Abrindo o painel administrativo...</p>;
 
     return (
-        <div className="w-full max-w-4xl mx-auto p-4 pb-24 relative">
+        <div className="w-full  mx-auto p-4 pb-24 relative bg-[#fcf9f8] min-h-screen font-sans">
 
             {/* SISTEMA DE AVISO EM TAILWIND (TOAST NOTIFICATION) */}
             {mensagemStatus.texto && (
                 <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
                     <div className={`w-full p-3 rounded-xl text-sm font-semibold text-center shadow-xl border transition-all duration-300
                         ${mensagemStatus.tipo === 'sucesso'
-                            ? 'bg-green-50 text-green-700 border-green-200'
-                            : 'bg-red-50 text-red-700 border-red-200'
+                            ? 'bg-[#8E6D67] text-white border-[#8E6D67]'
+                            : 'bg-[#8E6D67] text-red-500 border-[#8E6D67]'
                         }`}
                     >
                         {mensagemStatus.texto}
@@ -81,9 +81,9 @@ export default function AdminPanel() {
            
             {modalConfirma.aberto && (
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div className="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-gray-100 animate-fade-in">
-                        <h2 className="text-base font-bold text-gray-800 text-start">Confirmar Cancelamento</h2>
-                        <p className="text-xs text-gray-500 text-start mt-2">
+                    <div className="bg-[#FAF7F5] rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-gray-100 animate-fade-in">
+                        <h2 className="text-base font-bold text-[#1E2D4A] text-start">Confirmar Cancelamento</h2>
+                        <p className="text-xs text-[#1E2D4A] text-start mt-2">
                             Tem certeza que deseja cancelar o agendamento deste cliente? Esta ação atualizará o status no banco de dados.
                         </p>
                         <div className="flex items-center justify-end gap-x-3 mt-6">
@@ -95,7 +95,7 @@ export default function AdminPanel() {
                             </button>
                             <button
                                 onClick={handleCancelarAdmin}
-                                className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md transition-all active:scale-95"
+                                className="bg-[#8E6D67] hover:bg-[#7a5a52] text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md transition-all active:scale-95"
                             >
                                 Confirmar
                             </button>
@@ -105,8 +105,8 @@ export default function AdminPanel() {
             )}
 
             <div className="flex flex-col gap-y-1 text-start mb-6 border-b border-gray-100 pb-4">
-                <h1 className="text-2xl font-bold text-[#333]">Painel Administrativo</h1>
-                <p className="text-xs text-gray-500">Gerencie todos os horários e solicitações feitas no salão</p>
+                <h1 className="text-2xl font-bold text-[#1E2D4A]">Painel Administrativo</h1>
+                <p className="text-xs text-[#1E2D4A]">Gerencie todos os horários e solicitações feitas no salão</p>
             </div>
 
             {agendamentos.length === 0 ? (
@@ -126,8 +126,8 @@ export default function AdminPanel() {
                                 <div className="flex items-start justify-between">
                                     <div className="text-start">
                                         <span className="text-[10px] bg-zinc-100 text-zinc-600 px-2 py-0.5 rounded font-bold uppercase tracking-wider">Cliente</span>
-                                        <h3 className="text-base font-bold text-gray-800 mt-1">{ag.clienteId?.nome || 'Não identificado'}</h3>
-                                        <p className="text-xs text-gray-400">{ag.clienteId?.email || ''}</p>
+                                        <h3 className="text-base font-bold text-[#1E2D4A] mt-1">{ag.clienteId?.nome || 'Não identificado'}</h3>
+                                        <p className="text-xs text-[#1E2D4A]">{ag.clienteId?.email || ''}</p>
                                     </div>
 
                                     <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider
@@ -159,7 +159,7 @@ export default function AdminPanel() {
                                     {ag.status !== 'Cancelado' ? (
                                         <button
                                             onClick={() => abrirConfirmacao(ag._id)}
-                                            className="bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold px-4 py-2 rounded-xl transition-all active:scale-95 focus:outline-none"
+                                            className="bg-[#8E6D67] hover:bg-[#7a5a52] text-white text-xs font-bold px-4 py-2 rounded-xl transition-all active:scale-95 focus:outline-none"
                                         >
                                             Cancelar Agendamento
                                         </button>

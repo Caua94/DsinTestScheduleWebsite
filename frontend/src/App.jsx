@@ -18,7 +18,7 @@ export default function App() {
   });
   return (
     
-    <div className="w-full min-h-screen bg-[#fcf9f8] flex flex-col justify-center pb-32">
+    <div className="w-full min-h-screen bg-[#FAF7F5] flex flex-col justify-center pb-32 font-sans">
 
       <Header />
 
@@ -26,21 +26,21 @@ export default function App() {
 
       <main className="w-full">
 
-        <h1 className="text-2xl font-bold font-title text-start mt-4 ml-8 text-[#333]">Nossos Serviços</h1>
+        <h1 className="text-2xl font-bold  text-start mt-4 ml-8 text-[#1E2D4A]">Nossos Serviços</h1>
         <div className="w-full h-auto flex flex-wrap items-start justify-start p-4 gap-2">
           
           <ServiceCard onServiceSelect={(service) => setSelectedService(service)} />
         </div>
 
-        <h1 className="text-2xl font-bold font-title text-start mt-4 ml-8 text-[#333]">Agende seu horário</h1>
+        <h1 className="text-2xl font-bold  text-start mt-4 ml-8 text-[#1E2D4A]">Agende seu horário</h1>
 
-        <h2 className="text-lg font-semibold text-start ml-8 text-[#333]">Data</h2>
+        <h2 className="text-lg font-semibold text-start ml-8 text-[#1E2D4A]">Data</h2>
         <div className="w-full h-auto flex flex-row overflow-auto items-start justify-start p-4 gap-2">
          
           <DataCard onDateSelect={(date) => setSelectedDate(date)} />
         </div>
 
-        <h2 className="text-lg font-semibold text-start ml-8 text-[#333]">Horário</h2>
+        <h2 className="text-lg font-semibold text-start ml-8 text-[#1E2D4A]">Horário</h2>
         <div className="w-full h-auto flex flex-wrap items-start justify-start p-4 gap-2">
           
           <HourCard onHourSelect={(hour) => setSelectedHour(hour)} />
