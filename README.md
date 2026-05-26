@@ -19,7 +19,7 @@ Este projeto consiste em uma solução personalizada de agendamentos online dese
 
 ---
 
-## 🚀 Como Rodar o Projeto
+## Como Rodar o Projeto
 
 ### Pré-requisitos
 Certifique-se de ter instalado em sua máquina:
@@ -31,23 +31,29 @@ Certifique-se de ter instalado em sua máquina:
    ```bash
    cd backend
 
-2. npm install
+2. ```bash
+    npm install
 
 3. Crie um arquivo chamado .env na raiz da pasta backend e configure a sua porta e string de conexão do banco de dados:
 
     PORT=5000
     MONGO_URI=sua_string_de_conexao_do_mongodb
 
-4. node src/seed.js
+4. ```bash
+    node src/seed.js
 
-5. npm run dev
+5. ```bash
+    npm run dev
 
 6. Em um novo terminal, navegue até a pasta do front-end
 
+    ```bash
     cd frontend
 
+7.   ```bash
     npm install
 
+7.    ```bash
     npm run dev
 
 
